@@ -17,12 +17,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with PageMixin {
   bool selected = true;
   String? comboboxValue;
+  TextEditingController inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasFluentTheme(context));
     final theme = FluentTheme.of(context);
-
     return ScaffoldPage.scrollable(
         header: PageHeader(
             title: const Text('Home'),
@@ -32,8 +32,18 @@ class _HomePageState extends State<HomePage> with PageMixin {
                 onPressed:  () => debugPrint('pressed button'),
               )
             ])),
-        children: [
-          const Text('aaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        children:  [
+          Column(children: [
+            Text(inputController.text),
+            Container(child: TextBox(controller: inputController),width: 300,),
+            FilledButton(
+              child: const Text('Filled Button'),
+              onPressed:  () => {
+                setState(() => {}),
+                debugPrint(inputController.text)
+              },
+            )
+          ],)
         ]);
   }
 }
